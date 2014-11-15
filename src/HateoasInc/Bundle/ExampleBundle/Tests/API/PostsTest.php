@@ -178,4 +178,22 @@ class PostsTest extends ApiTestCase
         $this->assertResponseOK($client, $message);
         $this->assertJsonApiSchema($transfer, $message);
     }
+
+    /**
+     * @param \stdClass $doc
+     * @depends testPosting201
+     */
+    public function testDeleting204(\stdClass $doc)
+    {
+        /* Given... (Fixture) */
+        $url = $this->getRootUrl() . self::RESOURCE_PATH
+            . '/' . $doc->posts->id;
+        $client = $this->buildHttpClient($url, 'this_guy', 'cl34rt3xt')
+            ->setMethod('DELETE');
+        /* When... (Action) */
+        $transfer = $client->exec();
+        /* Then... (Assertions) */
+        $message = $transfer . "\n";
+        $this->assertResponseNoContent($client, $message);
+    }
 }
