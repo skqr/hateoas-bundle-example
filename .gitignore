@@ -39,6 +39,7 @@
 
 # Composer PHAR
 /composer.phar
+/composer.lock
 
 # Sublime Text
 hateoas-example.sublime-*
