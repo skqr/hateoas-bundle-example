@@ -28,7 +28,7 @@
         "sensio/distribution-bundle": "~3.0",
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
-        "gointegro/hateoas-bundle": "dev-feature/api-50-delete-resources",
+        "gointegro/hateoas-bundle": "dev-feature/redis-cache",
         "doctrine/doctrine-fixtures-bundle": "*",
         "skqr/php-raml-parser": "dev-master"
     },
