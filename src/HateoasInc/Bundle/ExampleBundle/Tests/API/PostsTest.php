@@ -47,6 +47,32 @@ class PostsTest extends ApiTestCase
         return json_decode($transfer);
     }
 
+    public function testPostingMany201()
+    {
+        /* Given... (Fixture) */
+        $url = $this->getRootUrl() . self::RESOURCE_PATH;
+        $body = [
+            'posts' => [
+                ['content' => "A post."],
+                ['content' => "Another post."],
+                ['content' => "Yet another post."],
+                ['content' => "OK, stop."],
+                ['content' => "Hammer time."]
+            ]
+        ];
+        $client = $this->buildHttpClient($url, 'this_guy', 'cl34rt3xt')
+            ->setMethod('POST')
+            ->setBody($body);
+        /* When... (Action) */
+        $transfer = $client->exec();
+        /* Then... (Assertions) */
+        $message = $transfer . "\n";
+        $this->assertResponseCreated($client, $message);
+        $this->assertJsonApiSchema($transfer, $message);
+
+        return json_decode($transfer);
+    }
+
     public function testGettingMany200()
     {
         /* Given... (Fixture) */
@@ -177,17 +203,71 @@ class PostsTest extends ApiTestCase
         $message = $transfer . "\n";
         $this->assertResponseOK($client, $message);
         $this->assertJsonApiSchema($transfer, $message);
+
+        return json_decode($transfer);
     }
 
     /**
      * @param \stdClass $doc
-     * @depends testPosting201
+     * @depends testPostingMany201
+     */
+    public function testPuttingMany200(\stdClass $doc)
+    {
+        /* Given... (Fixture) */
+        $ids = [];
+        $body = ['posts' => []];
+
+        foreach ($doc->posts as $post) {
+            $ids[] = $post->id;
+            $body['posts'][] = [
+                'id' => $post->id,
+                'content' => $post->content . " This wasn't here before."
+            ];
+        }
+
+        $url = $this->getRootUrl() . self::RESOURCE_PATH
+            . '/' . implode(',', $ids);
+        $client = $this->buildHttpClient($url, 'this_guy', 'cl34rt3xt')
+            ->setMethod('PUT')
+            ->setBody($body);
+        /* When... (Action) */
+        $transfer = $client->exec();
+        /* Then... (Assertions) */
+        $message = $transfer . "\n";
+        $this->assertResponseOK($client, $message);
+        $this->assertJsonApiSchema($transfer, $message);
+
+        return json_decode($transfer);
+    }
+
+    /**
+     * @param \stdClass $doc
+     * @depends testPutting200
      */
     public function testDeleting204(\stdClass $doc)
     {
         /* Given... (Fixture) */
         $url = $this->getRootUrl() . self::RESOURCE_PATH
             . '/' . $doc->posts->id;
+        $client = $this->buildHttpClient($url, 'this_guy', 'cl34rt3xt')
+            ->setMethod('DELETE');
+        /* When... (Action) */
+        $transfer = $client->exec();
+        /* Then... (Assertions) */
+        $message = $transfer . "\n";
+        $this->assertResponseNoContent($client, $message);
+    }
+
+    /**
+     * @param \stdClass $doc
+     * @depends testPuttingMany200
+     */
+    public function testDeletingMany204(\stdClass $doc)
+    {
+        /* Given... (Fixture) */
+        $ids = array_map(function($post) { return $post->id; }, $doc->posts);
+        $url = $this->getRootUrl() . self::RESOURCE_PATH
+            . '/' . implode(',', $ids);
         $client = $this->buildHttpClient($url, 'this_guy', 'cl34rt3xt')
             ->setMethod('DELETE');
         /* When... (Action) */
