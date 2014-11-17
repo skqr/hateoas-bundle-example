@@ -72,8 +72,11 @@ swiftmailer:
 go_integro_hateoas:
   json_api:
     magic_services:
+      - resource_type: user-groups
+        entity_class: HateoasInc\Bundle\ExampleBundle\Entity\UserGroup
       - resource_type: users
         entity_class: HateoasInc\Bundle\ExampleBundle\Entity\User
+        raml_doc: %kernel.root_dir%/../src/HateoasInc/Bundle/ExampleBundle/Resources/raml/users.raml
       - resource_type: posts
         entity_class: HateoasInc\Bundle\ExampleBundle\Entity\Post
         raml_doc: %kernel.root_dir%/../src/HateoasInc/Bundle/ExampleBundle/Resources/raml/posts.raml

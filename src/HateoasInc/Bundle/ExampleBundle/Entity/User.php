@@ -70,6 +70,15 @@ class User implements UserInterface, ResourceEntityInterface
     private $followers;
 
     /**
+     * @var ArrayCollection
+     * @ORM\ManyToMany(
+     *   targetEntity="HateoasInc\Bundle\ExampleBundle\Entity\UserGroup",
+     *   inversedBy="users"
+     * )
+     */
+    private $userGroups;
+
+    /**
      * @var string
      */
     private $salt;
@@ -263,5 +272,38 @@ class User implements UserInterface, ResourceEntityInterface
     public function getFollowers()
     {
         return $this->followers;
+    }
+
+    /**
+     * Add userGroups
+     *
+     * @param \HateoasInc\Bundle\ExampleBundle\Entity\UserGroup $userGroups
+     * @return User
+     */
+    public function addUserGroup(\HateoasInc\Bundle\ExampleBundle\Entity\UserGroup $userGroups)
+    {
+        $this->userGroups[] = $userGroups;
+
+        return $this;
+    }
+
+    /**
+     * Remove userGroups
+     *
+     * @param \HateoasInc\Bundle\ExampleBundle\Entity\UserGroup $userGroups
+     */
+    public function removeUserGroup(\HateoasInc\Bundle\ExampleBundle\Entity\UserGroup $userGroups)
+    {
+        $this->userGroups->removeElement($userGroups);
+    }
+
+    /**
+     * Get userGroups
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserGroups()
+    {
+        return $this->userGroups;
     }
 }

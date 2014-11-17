@@ -12,9 +12,7 @@ use Doctrine\Common\DataFixtures\AbstractFixture,
     Doctrine\Common\Persistence\ObjectManager,
     Doctrine\Common\Collections\ArrayCollection;
 // Entities.
-use HateoasInc\Bundle\ExampleBundle\Entity\User,
-    HateoasInc\Bundle\ExampleBundle\Entity\Post,
-    HateoasInc\Bundle\ExampleBundle\Entity\Comment;
+use HateoasInc\Bundle\ExampleBundle\Entity;
 // DI.
 use Symfony\Component\DependencyInjection\ContainerAwareInterface,
     Symfony\Component\DependencyInjection\ContainerInterface;
@@ -41,20 +39,31 @@ class SocialDataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $user = new User;
+        $patternsGroup = new Entity\UserGroup;
+        $patternsGroup->setName("Design Pattern Abusers Anonymous");
+        $this->addReference('patterns-group', $patternsGroup);
+
+        $coffeeGroup = new Entity\UserGroup;
+        $coffeeGroup->setName("Public Coffee Lovers");
+        $this->addReference('coffee-group', $coffeeGroup);
+
+        $user = new Entity\User;
         $user->setUsername("this_guy");
         $user->setEmail("this.guy@gmail.com");
         $user->setPassword("cl34rt3xt");
+        $user->addUserGroup($patternsGroup);
 
-        $post = new Post;
+        $post = new Entity\Post;
         $post->setContent("Check this bundle out. #RockedMyWorld");
         $post->setOwner($user);
 
-        $comment = new Comment;
+        $comment = new Entity\Comment;
         $comment->setContent("Mine too. #RockedMyWorld");
         $comment->setOwner($user);
         $post->addComment($comment);
 
+        $manager->persist($coffeeGroup);
+        $manager->persist($patternsGroup);
         $manager->persist($user);
         $manager->persist($post);
         $manager->persist($comment);

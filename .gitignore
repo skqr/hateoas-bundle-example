@@ -45,4 +45,4 @@
 hateoas-example.sublime-*
 
 # SQLite
-app/data/sqlite.db
+app/data/sqlite.db*
