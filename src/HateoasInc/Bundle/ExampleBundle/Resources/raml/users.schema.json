@@ -16,7 +16,7 @@
                     "required": [ "user-groups" ]
                 }
             },
-            "required": [ "username", "password", "email", "name", "surname" ]
+            "required": [ "username", "email", "name", "surname" ]
         }
     }
 }

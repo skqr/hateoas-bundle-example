@@ -109,7 +109,10 @@ class UsersTest extends ApiTestCase
             . '/' . $doc->users->id;
         $body = ['users' => [
             'id' => $doc->users->id,
+            'username' => "red-nose",
+            'email' => "reindeer_samurai84@christmastown.org",
             'name' => "Rudolph",
+            'surname' => "Reindeer",
             'links' => [
                 'user-groups' => [$coffeeGroup->getId()]
             ]
