@@ -126,7 +126,25 @@ class UsersTest extends ApiTestCase
         $message = $transfer . "\n";
         $this->assertResponseOK($client, $message);
         $this->assertJsonApiSchema($transfer, $message);
-
-        return json_decode($transfer);
+        $expected = [
+          'links' => [
+            'users.user-groups' => [
+              'href' => '/api/v1/users/{users.id}/links/user-groups',
+              'type' => 'user-groups',
+            ],
+          ],
+          'users' => [
+            'id' => $doc->users->id,
+            'type' => 'users',
+            'roles' => ['ROLE_USER'],
+            'username' => 'red-nose',
+            'email' => 'reindeer_samurai84@christmastown.org',
+            'name' => 'Rudolph',
+            'surname' => 'Reindeer',
+            'links' => ['user-groups' => [(string) $coffeeGroup->getId()]]
+          ]
+        ];
+        $transfer = json_decode($transfer, TRUE);
+        $this->assertEquals($expected, $transfer);
     }
 }
