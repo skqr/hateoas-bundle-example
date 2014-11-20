@@ -74,6 +74,7 @@ go_integro_hateoas:
     magic_services:
       - resource_type: user-groups
         entity_class: HateoasInc\Bundle\ExampleBundle\Entity\UserGroup
+        raml_doc: %kernel.root_dir%/../src/HateoasInc/Bundle/ExampleBundle/Resources/raml/user-groups.raml
       - resource_type: users
         entity_class: HateoasInc\Bundle\ExampleBundle\Entity\User
         raml_doc: %kernel.root_dir%/../src/HateoasInc/Bundle/ExampleBundle/Resources/raml/users.raml
@@ -82,3 +83,17 @@ go_integro_hateoas:
         raml_doc: %kernel.root_dir%/../src/HateoasInc/Bundle/ExampleBundle/Resources/raml/posts.raml
       - resource_type: comments
         entity_class: HateoasInc\Bundle\ExampleBundle\Entity\Comment
+        raml_doc: %kernel.root_dir%/../src/HateoasInc/Bundle/ExampleBundle/Resources/raml/comments.raml
+  cache: ~
+    # resource:
+    #   redis:
+    #     parameters:
+    #       scheme: tcp
+    #       host: 127.0.0.1
+    #       port: 6379
+    #     options: []
+    #   memcached: ~
+    #     persistent_id: null
+    #     servers:
+    #       - host: 127.0.0.1
+    #         port: 11211
