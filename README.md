@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/skqr/hateoas-bundle-example.svg)](https://travis-ci.org/skqr/hateoas-bundle-example)
+
 [GOintegro](http://www.gointegro.com/en/) / HATEOAS (example)
 =============================================================
 
@@ -10,8 +12,7 @@ Here's a small example app, so you can feel the HATEOAS magic in your finger tip
 
 If you have SQLite and a couple of minutes, you can
 - clone the project,
-- open the `example/` dir,
-- install the [Composer](http://getcomposer.org/) deps there,
+- install the [Composer](http://getcomposer.org/) deps,
 - run `app/console doctrine:schema:create` to setup the db,
 - run `app/console server:run` to run the app at `127.0.0.1:8000`,
 
