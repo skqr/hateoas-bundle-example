@@ -14,4 +14,4 @@ before_script:
   - app/console doctrine:schema:create
   - app/console server:run &
 
-script: phpunit
+script: phpunit -c app/phpunit.xml.dist
