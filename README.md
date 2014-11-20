@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/skqr/hateoas-bundle-example.svg)](https://travis-ci.org/skqr/hateoas-bundle-example)
+
 [GOintegro](http://www.gointegro.com/en/) / HATEOAS (example)
 =============================================================
 
