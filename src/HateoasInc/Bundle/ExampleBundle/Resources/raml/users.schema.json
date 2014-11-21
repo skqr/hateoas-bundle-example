@@ -3,8 +3,20 @@
     "type": "object",
     "description": "A user.",
     "properties": {
-      "id":  { "type": "string" },
-      "email": { "type": "string" }
-    },
-    "required": [ "email" ]
+        "users": {
+            "type": "object",
+            "properties": {
+                "id":  { "type": "string" },
+                "content": { "type": "string" },
+                "links": {
+                    "type": "object",
+                    "properties": {
+                        "user-groups": { "type": "array" }
+                    },
+                    "required": [ "user-groups" ]
+                }
+            },
+            "required": [ "username", "email", "name", "surname" ]
+        }
+    }
 }

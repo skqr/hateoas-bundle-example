@@ -13,13 +13,15 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class PostVoter implements VoterInterface
 {
-    const VIEW = 'view';
-    const EDIT = 'edit';
+    const VIEW = 'view',
+        EDIT = 'edit',
+        DELETE = 'delete';
+
     const SUPPORTED_CLASS = 'HateoasInc\\Bundle\\ExampleBundle\\Entity\\Post';
 
     public function supportsAttribute($attribute)
     {
-        return in_array($attribute, [self::VIEW, self::EDIT]);
+        return in_array($attribute, [self::VIEW, self::EDIT, self::DELETE]);
     }
 
     public function supportsClass($class)
@@ -64,6 +66,7 @@ class PostVoter implements VoterInterface
                 break;
 
             case self::EDIT:
+            case self::DELETE:
                 if ($user->getId() === $post->getOwner()->getId()) {
                     return VoterInterface::ACCESS_GRANTED;
                 }

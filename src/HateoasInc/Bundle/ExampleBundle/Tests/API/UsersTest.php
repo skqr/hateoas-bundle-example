@@ -21,12 +21,19 @@ class UsersTest extends ApiTestCase
     const RESOURCE_PATH = '/api/v1/users';
 
     /**
+     * @var array
+     */
+    private static $fixtures;
+
+    /**
      * Obtiene los fixtures de este test case.
      * @return array <FixtureInterface>
      */
     protected static function getFixtures()
     {
-        return [new SocialDataFixture];
+        self::$fixtures = ['social' => new SocialDataFixture];
+
+        return self::$fixtures;
     }
 
     /**
@@ -85,5 +92,59 @@ class UsersTest extends ApiTestCase
         $message = $transfer . "\n";
         $this->assertResponseNotFound($client, $message);
         $this->assertJsonApiSchema($transfer, $message);
+    }
+
+    /**
+     * @param \stdClass $doc
+     * @depends testGettingOne200
+     */
+    public function testPutting200(\stdClass $doc)
+    {
+        /* Given... (Fixture) */
+        $patternsGroup
+            = self::$fixtures['social']->getReference('patterns-group');
+        $coffeeGroup
+            = self::$fixtures['social']->getReference('coffee-group');
+        $url = $this->getRootUrl() . self::RESOURCE_PATH
+            . '/' . $doc->users->id;
+        $body = ['users' => [
+            'id' => $doc->users->id,
+            'username' => "red-nose",
+            'email' => "reindeer_samurai84@christmastown.org",
+            'name' => "Rudolph",
+            'surname' => "Reindeer",
+            'links' => [
+                'user-groups' => [$coffeeGroup->getId()]
+            ]
+        ]];
+        $client = $this->buildHttpClient($url, 'this_guy', 'cl34rt3xt')
+            ->setMethod('PUT')
+            ->setBody($body);
+        /* When... (Action) */
+        $transfer = $client->exec();
+        /* Then... (Assertions) */
+        $message = $transfer . "\n";
+        $this->assertResponseOK($client, $message);
+        $this->assertJsonApiSchema($transfer, $message);
+        $expected = [
+          'links' => [
+            'users.user-groups' => [
+              'href' => '/api/v1/users/{users.id}/links/user-groups',
+              'type' => 'user-groups',
+            ],
+          ],
+          'users' => [
+            'id' => $doc->users->id,
+            'type' => 'users',
+            'roles' => ['ROLE_USER'],
+            'username' => 'red-nose',
+            'email' => 'reindeer_samurai84@christmastown.org',
+            'name' => 'Rudolph',
+            'surname' => 'Reindeer',
+            'links' => ['user-groups' => [(string) $coffeeGroup->getId()]]
+          ]
+        ];
+        $transfer = json_decode($transfer, TRUE);
+        $this->assertEquals($expected, $transfer);
     }
 }

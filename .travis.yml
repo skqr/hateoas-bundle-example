@@ -1,0 +1,17 @@
+# see http://about.travis-ci.org/docs/user/languages/php/ for more hints
+language: php
+
+php:
+  # aliased to a recent 5.4.x version
+  - 5.4
+  # aliased to a recent 5.5.x version
+  - 5.5
+  # aliased to a recent 5.6.x version
+  - 5.6
+
+before_script:
+  - composer install
+  - app/console doctrine:schema:create
+  - app/console server:run &
+
+script: phpunit -c app/phpunit.xml.dist
