@@ -6,16 +6,6 @@
     "autoload": {
         "psr-0": { "": "src/", "SymfonyStandard": "app/" }
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/skqr/php-raml-parser.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/skqr/ReverseRegex.git"
-        }
-    ],
     "require": {
         "php": ">=5.3.3",
         "symfony/symfony": "2.5.*",
@@ -29,12 +19,10 @@
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
         "gointegro/hateoas-bundle": "dev-develop",
-        "doctrine/doctrine-fixtures-bundle": "*",
-        "skqr/php-raml-parser": "dev-master"
+        "doctrine/doctrine-fixtures-bundle": "*"
     },
     "require-dev": {
-        "sensio/generator-bundle": "~2.3",
-        "skqr/reverse-regex": "dev-master"
+        "sensio/generator-bundle": "~2.3"
     },
     "scripts": {
         "post-root-package-install": [
