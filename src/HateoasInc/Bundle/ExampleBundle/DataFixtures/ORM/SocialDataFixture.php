@@ -60,6 +60,7 @@ class SocialDataFixture
         $comment = new Entity\Comment;
         $comment->setContent("Mine too. #RockedMyWorld");
         $comment->setOwner($user);
+        $comment->setSubject($post);
         $post->addComment($comment);
 
         $manager->persist($coffeeGroup);
