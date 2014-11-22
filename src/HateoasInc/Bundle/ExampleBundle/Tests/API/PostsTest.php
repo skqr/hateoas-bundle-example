@@ -127,6 +127,45 @@ class PostsTest extends ApiTestCase
      * @param \stdClass $doc
      * @depends testPosting201
      */
+    public function testGettingOneWithFields200(\stdClass $doc)
+    {
+        /* Given... (Fixture) */
+        $url = $this->getRootUrl() . self::RESOURCE_PATH
+            . '/' . $doc->posts->id
+            . '?fields=content';
+        $client = $this->buildHttpClient($url, 'this_guy', 'cl34rt3xt');
+        /* When... (Action) */
+        $transfer = $client->exec();
+        /* Then... (Assertions) */
+        $message = $transfer . "\n";
+        $this->assertResponseOK($client, $message);
+        $this->assertJsonApiSchema($transfer, $message);
+    }
+
+    /**
+     * @param \stdClass $doc
+     * @depends testPosting201
+     */
+    public function testGettingOneWithInclusionAndFields200(\stdClass $doc)
+    {
+        /* Given... (Fixture) */
+        $url = $this->getRootUrl() . self::RESOURCE_PATH
+            . '/' . $doc->posts->id
+            . '?include=owner,comments'
+            . '&fields[users]=email';
+        $client = $this->buildHttpClient($url, 'this_guy', 'cl34rt3xt');
+        /* When... (Action) */
+        $transfer = $client->exec();
+        /* Then... (Assertions) */
+        $message = $transfer . "\n";
+        $this->assertResponseOK($client, $message);
+        $this->assertJsonApiSchema($transfer, $message);
+    }
+
+    /**
+     * @param \stdClass $doc
+     * @depends testPosting201
+     */
     public function testGettingContentField200(\stdClass $doc)
     {
         /* Given... (Fixture) */
