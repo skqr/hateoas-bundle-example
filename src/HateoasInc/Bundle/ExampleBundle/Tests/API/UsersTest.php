@@ -144,7 +144,35 @@ class UsersTest extends ApiTestCase
             'links' => ['user-groups' => [(string) $coffeeGroup->getId()]]
           ]
         ];
-        $transfer = json_decode($transfer, TRUE);
-        $this->assertEquals($expected, $transfer);
+        $data = json_decode($transfer, TRUE);
+        $this->assertEquals($expected, $data);
+
+        return json_decode($transfer);
+    }
+
+    /**
+     * @param \stdClass $doc
+     * @depends testPutting200
+     */
+    public function testAddingGroupRelation204(\stdClass $doc)
+    {
+        /* Given... (Fixture) */
+        $patternsGroup
+            = self::$fixtures['social']->getReference('patterns-group');
+        $coffeeGroup
+            = self::$fixtures['social']->getReference('coffee-group');
+        $url = $this->getRootUrl() . self::RESOURCE_PATH
+            . '/' . $doc->users->id
+            . '/links/user-groups';
+        $body = ['user-groups' => [(string) $patternsGroup->getId()]];
+        $client = $this->buildHttpClient($url, 'this_guy', 'cl34rt3xt')
+            ->setMethod('POST')
+            ->setBody($body);
+        /* When... (Action) */
+        $transfer = $client->exec();
+        /* Then... (Assertions) */
+        $message = $transfer . "\n";
+        $this->assertResponseNoContent($client, $message);
+        $this->assertJsonApiSchema($transfer, $message);
     }
 }

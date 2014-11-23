@@ -41,10 +41,12 @@ class SocialDataFixture
     {
         $patternsGroup = new Entity\UserGroup;
         $patternsGroup->setName("Design Pattern Abusers Anonymous");
+        $manager->persist($patternsGroup);
         $this->addReference('patterns-group', $patternsGroup);
 
         $coffeeGroup = new Entity\UserGroup;
         $coffeeGroup->setName("Public Coffee Lovers");
+        $manager->persist($coffeeGroup);
         $this->addReference('coffee-group', $coffeeGroup);
 
         $user = new Entity\User;
@@ -52,21 +54,17 @@ class SocialDataFixture
         $user->setEmail("this.guy@gmail.com");
         $user->setPassword("cl34rt3xt");
         $user->addUserGroup($patternsGroup);
+        $manager->persist($user);
 
         $post = new Entity\Post;
         $post->setContent("Check this bundle out. #RockedMyWorld");
         $post->setOwner($user);
+        $manager->persist($post);
 
         $comment = new Entity\Comment;
         $comment->setContent("Mine too. #RockedMyWorld");
         $comment->setOwner($user);
         $comment->setSubject($post);
-        $post->addComment($comment);
-
-        $manager->persist($coffeeGroup);
-        $manager->persist($patternsGroup);
-        $manager->persist($user);
-        $manager->persist($post);
         $manager->persist($comment);
 
         $manager->flush();
