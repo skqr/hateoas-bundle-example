@@ -18,7 +18,7 @@ traits: !include traits.raml
     description: Creates one or more users.
     responses:
       201:
-  /{userIds}:
+  /{user-ids}:
     get:
       description: Retrieves one or more users.
       responses:
@@ -26,7 +26,23 @@ traits: !include traits.raml
     put:
       description: Updates one or more users.
       responses:
-        204:
+        200:
     delete:
       description: Deletes one or more users.
-      description: This method will *delete* an **individual song**
+    /links:
+      /{relationship}:
+        get:
+          description: Retrieves one or more users.
+          responses:
+            200:
+        post:
+          description: Creates one or more users.
+          responses:
+            201:
+        put:
+          description: Updates one or more users.
+          responses:
+            204:
+        /{relationship-ids}:
+          delete:
+            description: Deletes one or more users.

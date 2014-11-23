@@ -1,0 +1,31 @@
+#%RAML 0.8
+title: HATEOAS Inc. Example API
+version: v1
+baseUri: http://hateoas-example.skqr.net/app_dev.php/api/{version}
+mediaType: application/vnd.api+json
+# schemas:
+#   - default: !include user-groups.schema.json
+resourceTypes: !include resource_types.raml
+traits: !include traits.raml
+/user-groups:
+  displayName: Posts
+  get:
+    description: Retrieves one or more user-groups.
+    is: [paginated]
+    responses:
+      200:
+  post:
+    description: Creates one or more user-groups.
+    responses:
+      201:
+  /{user-group-ids}:
+    get:
+      description: Retrieves one or more user-groups.
+      responses:
+        200:
+    put:
+      description: Updates one or more user-groups.
+      responses:
+        204:
+    delete:
+      description: Deletes one or more user-groups.

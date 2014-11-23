@@ -1,0 +1,31 @@
+#%RAML 0.8
+title: HATEOAS Inc. Example API
+version: v1
+baseUri: http://hateoas-example.skqr.net/app_dev.php/api/{version}
+mediaType: application/vnd.api+json
+# schemas:
+#   - default: !include comments.schema.json
+resourceTypes: !include resource_types.raml
+traits: !include traits.raml
+/comments:
+  displayName: Posts
+  get:
+    description: Retrieves one or more comments.
+    is: [paginated]
+    responses:
+      200:
+  post:
+    description: Creates one or more comments.
+    responses:
+      201:
+  /{comment-ids}:
+    get:
+      description: Retrieves one or more comments.
+      responses:
+        200:
+    put:
+      description: Updates one or more comments.
+      responses:
+        204:
+    delete:
+      description: Deletes one or more comments.
