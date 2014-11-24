@@ -49,21 +49,33 @@ class SocialDataFixture
         $manager->persist($coffeeGroup);
         $this->addReference('coffee-group', $coffeeGroup);
 
-        $user = new Entity\User;
-        $user->setUsername("this_guy");
-        $user->setEmail("this.guy@gmail.com");
-        $user->setPassword("cl34rt3xt");
-        $user->addUserGroup($patternsGroup);
-        $manager->persist($user);
+        $soapGroup = new Entity\UserGroup;
+        $soapGroup->setName("The SOAP's Advocates");
+        $manager->persist($soapGroup);
+        $this->addReference('soap-group', $soapGroup);
+
+        $thisUser = new Entity\User;
+        $thisUser->setUsername("this_guy");
+        $thisUser->setEmail("this.guy@gmail.com");
+        $thisUser->setPassword("cl34rt3xt");
+        $thisUser->addUserGroup($patternsGroup);
+        $manager->persist($thisUser);
+
+        $otherUser = new Entity\User;
+        $otherUser->setUsername("the_other_guy");
+        $otherUser->setEmail("the.other.guy@gmail.com");
+        $otherUser->setPassword("b4dp4ssw0rd");
+        $otherUser->addUserGroup($coffeeGroup);
+        $manager->persist($otherUser);
 
         $post = new Entity\Post;
         $post->setContent("Check this bundle out. #RockedMyWorld");
-        $post->setOwner($user);
+        $post->setOwner($thisUser);
         $manager->persist($post);
 
         $comment = new Entity\Comment;
         $comment->setContent("Mine too. #RockedMyWorld");
-        $comment->setOwner($user);
+        $comment->setOwner($otherUser);
         $comment->setSubject($post);
         $manager->persist($comment);
 

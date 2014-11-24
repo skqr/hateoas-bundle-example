@@ -109,16 +109,6 @@ class UsersTest extends ApiTestCase
             // . '/' . $doc->users->id;
             . '/' . $doc->users->id
             . '/links/user-groups';
-        // $body = ['users' => [
-        //     'id' => $doc->users->id,
-        //     'username' => "red-nose",
-        //     'email' => "reindeer_samurai84@christmastown.org",
-        //     'name' => "Rudolph",
-        //     'surname' => "Reindeer",
-        //     'links' => [
-        //         'user-groups' => [$coffeeGroup->getId()]
-        //     ]
-        // ]];
         $body = ['user-groups' => [(string) $patternsGroup->getId()]];
         $client = $this->buildHttpClient($url, 'this_guy', 'cl34rt3xt')
             ->setMethod('PUT')
