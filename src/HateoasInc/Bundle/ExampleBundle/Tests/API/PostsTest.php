@@ -166,6 +166,79 @@ class PostsTest extends ApiTestCase
      * @param \stdClass $doc
      * @depends testPosting201
      */
+    public function testGettingOneWithEverything200(\stdClass $doc)
+    {
+        /* Given... (Fixture) */
+        $url = $this->getRootUrl() . self::RESOURCE_PATH
+            . '/' . $doc->posts->id
+            . '?include=owner.user-groups.users'
+            . ',comments.owner.user-groups'
+            . '&fields[users]=email';
+        $client = $this->buildHttpClient($url, 'this_guy', 'cl34rt3xt');
+        /* When... (Action) */
+        $transfer = $client->exec();
+        /* Then... (Assertions) */
+        $message = $transfer . "\n";
+        $this->assertResponseOK($client, $message);
+        $this->assertJsonApiSchema($transfer, $message);
+        $expected = [
+            'links' => [
+                'posts.owner' => [
+                    'href' => '/api/v1/users/{posts.owner}',
+                    'type' => 'users'
+                ],
+                'posts.comments' => [
+                    'href' => '/api/v1/posts/{posts.id}/links/comments',
+                    'type' => 'comments'
+                ],
+                'users.user-groups' => [
+                    'href' => '/api/v1/users/{users.id}/links/user-groups',
+                    'type' => 'user-groups'
+                ],
+                'user-groups.users' => [
+                    'href' => '/api/v1/user-groups/{user-groups.id}/links/users',
+                    'type' => 'users'
+                ]
+            ],
+            'posts' => [
+                'id' => '2',
+                'type' => 'posts',
+                'content' => 'This is quite a post.',
+                'links' => [
+                    'owner' => '1'
+                ]
+            ],
+            'linked' => [
+                'users' => [
+                    [
+                        'id' => '1',
+                        'type' => 'users',
+                        'email' => 'this.guy@gmail.com',
+                        'links' => [
+                            'user-groups' => ['1']
+                        ]
+                    ]
+                ],
+                'user-groups' => [
+                    [
+                        'id' => '1',
+                        'type' => 'user-groups',
+                        'name' => 'Design Pattern Abusers Anonymous',
+                        'links' => [
+                            'users' => ['1']
+                        ]
+                    ]
+                ]
+            ]
+        ];
+        $data = json_decode($transfer, TRUE);
+        $this->assertEquals($expected, $data);
+    }
+
+    /**
+     * @param \stdClass $doc
+     * @depends testPosting201
+     */
     public function testGettingContentField200(\stdClass $doc)
     {
         /* Given... (Fixture) */
