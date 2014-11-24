@@ -106,6 +106,42 @@ class UsersTest extends ApiTestCase
         $coffeeGroup
             = self::$fixtures['social']->getReference('coffee-group');
         $url = $this->getRootUrl() . self::RESOURCE_PATH
+            // . '/' . $doc->users->id;
+            . '/' . $doc->users->id
+            . '/links/user-groups';
+        // $body = ['users' => [
+        //     'id' => $doc->users->id,
+        //     'username' => "red-nose",
+        //     'email' => "reindeer_samurai84@christmastown.org",
+        //     'name' => "Rudolph",
+        //     'surname' => "Reindeer",
+        //     'links' => [
+        //         'user-groups' => [$coffeeGroup->getId()]
+        //     ]
+        // ]];
+        $body = ['user-groups' => [(string) $patternsGroup->getId()]];
+        $client = $this->buildHttpClient($url, 'this_guy', 'cl34rt3xt')
+            ->setMethod('PUT')
+            ->setBody($body);
+        /* When... (Action) */
+        $transfer = $client->exec();
+        /* Then... (Assertions) */
+        $message = $transfer . "\n";
+        $this->assertResponseNoContent($client, $message);
+    }
+
+    /**
+     * @param \stdClass $doc
+     * @depends testGettingOne200
+     */
+    public function testAddingGroupRelation204(\stdClass $doc)
+    {
+        /* Given... (Fixture) */
+        $patternsGroup
+            = self::$fixtures['social']->getReference('patterns-group');
+        $coffeeGroup
+            = self::$fixtures['social']->getReference('coffee-group');
+        $url = $this->getRootUrl() . self::RESOURCE_PATH
             . '/' . $doc->users->id;
         $body = ['users' => [
             'id' => $doc->users->id,
@@ -146,33 +182,5 @@ class UsersTest extends ApiTestCase
         ];
         $data = json_decode($transfer, TRUE);
         $this->assertEquals($expected, $data);
-
-        return json_decode($transfer);
-    }
-
-    /**
-     * @param \stdClass $doc
-     * @depends testPutting200
-     */
-    public function testAddingGroupRelation204(\stdClass $doc)
-    {
-        /* Given... (Fixture) */
-        $patternsGroup
-            = self::$fixtures['social']->getReference('patterns-group');
-        $coffeeGroup
-            = self::$fixtures['social']->getReference('coffee-group');
-        $url = $this->getRootUrl() . self::RESOURCE_PATH
-            . '/' . $doc->users->id
-            . '/links/user-groups';
-        $body = ['user-groups' => [(string) $patternsGroup->getId()]];
-        $client = $this->buildHttpClient($url, 'this_guy', 'cl34rt3xt')
-            ->setMethod('POST')
-            ->setBody($body);
-        /* When... (Action) */
-        $transfer = $client->exec();
-        /* Then... (Assertions) */
-        $message = $transfer . "\n";
-        $this->assertResponseNoContent($client, $message);
-        $this->assertJsonApiSchema($transfer, $message);
     }
 }
