@@ -43,6 +43,8 @@ traits: !include traits.raml
           description: Updates one or more users.
           responses:
             204:
+        delete:
+          description: Deletes all relationships of this type.
         /{relationship-ids}:
           delete:
             description: Deletes one or more users.
