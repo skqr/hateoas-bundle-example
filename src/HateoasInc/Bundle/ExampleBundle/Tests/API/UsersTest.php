@@ -98,33 +98,7 @@ class UsersTest extends ApiTestCase
      * @param \stdClass $doc
      * @depends testGettingOne200
      */
-    public function testPutting200(\stdClass $doc)
-    {
-        /* Given... (Fixture) */
-        $patternsGroup
-            = self::$fixtures['social']->getReference('patterns-group');
-        $coffeeGroup
-            = self::$fixtures['social']->getReference('coffee-group');
-        $url = $this->getRootUrl() . self::RESOURCE_PATH
-            // . '/' . $doc->users->id;
-            . '/' . $doc->users->id
-            . '/links/user-groups';
-        $body = ['user-groups' => [(string) $patternsGroup->getId()]];
-        $client = $this->buildHttpClient($url, 'this_guy', 'cl34rt3xt')
-            ->setMethod('PUT')
-            ->setBody($body);
-        /* When... (Action) */
-        $transfer = $client->exec();
-        /* Then... (Assertions) */
-        $message = $transfer . "\n";
-        $this->assertResponseNoContent($client, $message);
-    }
-
-    /**
-     * @param \stdClass $doc
-     * @depends testGettingOne200
-     */
-    public function testAddingGroupRelation204(\stdClass $doc)
+    public function testPuttingOne200(\stdClass $doc)
     {
         /* Given... (Fixture) */
         $patternsGroup
@@ -135,7 +109,7 @@ class UsersTest extends ApiTestCase
             . '/' . $doc->users->id;
         $body = ['users' => [
             'id' => $doc->users->id,
-            'username' => "red-nose",
+            'username' => "red_nose",
             'email' => "reindeer_samurai84@christmastown.org",
             'name' => "Rudolph",
             'surname' => "Reindeer",
@@ -163,7 +137,7 @@ class UsersTest extends ApiTestCase
             'id' => $doc->users->id,
             'type' => 'users',
             'roles' => ['ROLE_USER'],
-            'username' => 'red-nose',
+            'username' => 'red_nose',
             'email' => 'reindeer_samurai84@christmastown.org',
             'name' => 'Rudolph',
             'surname' => 'Reindeer',
@@ -172,5 +146,149 @@ class UsersTest extends ApiTestCase
         ];
         $data = json_decode($transfer, TRUE);
         $this->assertEquals($expected, $data);
+
+        return json_decode($transfer);
+    }
+
+    /**
+     * @param \stdClass $doc
+     * @depends testPuttingOne200
+     */
+    public function testDeletingGroupRelation204(\stdClass $doc)
+    {
+        /* Given... (Fixture) */
+        $patternsGroup
+            = self::$fixtures['social']->getReference('patterns-group');
+        $url = $this->getRootUrl() . self::RESOURCE_PATH
+            . '/' . $doc->users->id
+            . '/links/user-groups';
+        $client = $this->buildHttpClient($url, 'red_nose', 'cl34rt3xt')
+            ->setMethod('DELETE');
+        /* When... (Action) */
+        $transfer = $client->exec();
+        /* Then... (Assertions) */
+        $message = $transfer . "\n";
+        $this->assertResponseNoContent($client, $message);
+
+        return $doc;
+    }
+
+    /**
+     * @param \stdClass $doc
+     * @depends testDeletingGroupRelation204
+     */
+    public function testUpdatingGroupRelation204(\stdClass $doc)
+    {
+        /* Given... (Fixture) */
+        $patternsGroup
+            = self::$fixtures['social']->getReference('patterns-group');
+        $url = $this->getRootUrl() . self::RESOURCE_PATH
+            . '/' . $doc->users->id
+            . '/links/user-groups';
+        $body = ['user-groups' => [(string) $patternsGroup->getId()]];
+        $client = $this->buildHttpClient($url, 'red_nose', 'cl34rt3xt')
+            ->setMethod('PUT')
+            ->setBody($body);
+        /* When... (Action) */
+        $transfer = $client->exec();
+        /* Then... (Assertions) */
+        $message = $transfer . "\n";
+        $this->assertResponseNoContent($client, $message);
+
+        return $doc;
+    }
+
+    /**
+     * @param \stdClass $doc
+     * @depends testUpdatingGroupRelation204
+     */
+    public function testAddingGroupRelation204(\stdClass $doc)
+    {
+        /* Given... (Fixture) */
+        $coffeeGroup
+            = self::$fixtures['social']->getReference('coffee-group');
+        $url = $this->getRootUrl() . self::RESOURCE_PATH
+            . '/' . $doc->users->id
+            . '/links/user-groups';
+        $body = ['user-groups' => [(string) $coffeeGroup->getId()]];
+        $client = $this->buildHttpClient($url, 'red_nose', 'cl34rt3xt')
+            ->setMethod('POST')
+            ->setBody($body);
+        /* When... (Action) */
+        $transfer = $client->exec();
+        /* Then... (Assertions) */
+        $message = $transfer . "\n";
+        $this->assertResponseNoContent($client, $message);
+
+        return $doc;
+    }
+
+    /**
+     * @param \stdClass $doc
+     * @depends testAddingGroupRelation204
+     */
+    public function testAddingGroupRelation409(\stdClass $doc)
+    {
+        /* Given... (Fixture) */
+        $coffeeGroup
+            = self::$fixtures['social']->getReference('coffee-group');
+        $url = $this->getRootUrl() . self::RESOURCE_PATH
+            . '/' . $doc->users->id
+            . '/links/user-groups';
+        $body = ['user-groups' => [(string) $coffeeGroup->getId()]];
+        $client = $this->buildHttpClient($url, 'red_nose', 'cl34rt3xt')
+            ->setMethod('POST')
+            ->setBody($body);
+        /* When... (Action) */
+        $transfer = $client->exec();
+        /* Then... (Assertions) */
+        $message = $transfer . "\n";
+        $this->assertResponseConflict($client, $message);
+    }
+
+    /**
+     * @param \stdClass $doc
+     * @depends testAddingGroupRelation204
+     */
+    public function testDeletingFromGroupRelation204(\stdClass $doc)
+    {
+        /* Given... (Fixture) */
+        $patternsGroup
+            = self::$fixtures['social']->getReference('patterns-group');
+        $url = $this->getRootUrl() . self::RESOURCE_PATH
+            . '/' . $doc->users->id
+            . '/links/user-groups'
+            . '/' . $patternsGroup->getId();
+        $client = $this->buildHttpClient($url, 'red_nose', 'cl34rt3xt')
+            ->setMethod('DELETE');
+        /* When... (Action) */
+        $transfer = $client->exec();
+        /* Then... (Assertions) */
+        $message = $transfer . "\n";
+        $this->assertResponseNoContent($client, $message);
+
+        return $doc;
+    }
+
+    /**
+     * @param \stdClass $doc
+     * @depends testDeletingFromGroupRelation204
+     */
+    public function testDeletingGroupRelation404(\stdClass $doc)
+    {
+        /* Given... (Fixture) */
+        $patternsGroup
+            = self::$fixtures['social']->getReference('patterns-group');
+        $url = $this->getRootUrl() . self::RESOURCE_PATH
+            . '/' . $doc->users->id
+            . '/links/user-groups'
+            . '/' . $patternsGroup->getId();
+        $client = $this->buildHttpClient($url, 'red_nose', 'cl34rt3xt')
+            ->setMethod('DELETE');
+        /* When... (Action) */
+        $transfer = $client->exec();
+        /* Then... (Assertions) */
+        $message = $transfer . "\n";
+        $this->assertResponseNotFound($client, $message);
     }
 }
