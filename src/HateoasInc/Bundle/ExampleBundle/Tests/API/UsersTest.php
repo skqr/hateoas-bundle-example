@@ -154,6 +154,60 @@ class UsersTest extends ApiTestCase
      * @param \stdClass $doc
      * @depends testPuttingOne200
      */
+    public function testPuttingOne403(\stdClass $doc)
+    {
+        /* Given... (Fixture) */
+        $user = self::$fixtures['social']->getReference('player-2');
+        $url = $this->getRootUrl() . self::RESOURCE_PATH
+            . '/' . $user->getId();
+        $body = ['users' => [
+            'id' => $user->getId(),
+            'username' => "red_nose",
+            'email' => "reindeer_samurai84@christmastown.org",
+            'name' => "Rudolph",
+            'surname' => "Reindeer"
+        ]];
+        $client = $this->buildHttpClient($url, 'red_nose', 'cl34rt3xt')
+            ->setMethod('PUT')
+            ->setBody($body);
+        /* When... (Action) */
+        $transfer = $client->exec();
+        /* Then... (Assertions) */
+        $message = $transfer . "\n";
+        $this->assertResponseForbidden($client, $message);
+    }
+
+    /**
+     * @param \stdClass $doc
+     * @depends testPuttingOne200
+     */
+    public function testPuttingOne409(\stdClass $doc)
+    {
+        /* Given... (Fixture) */
+        $user = self::$fixtures['social']->getReference('player-2');
+        $url = $this->getRootUrl() . self::RESOURCE_PATH
+            . '/' . $doc->users->id;
+        $body = ['users' => [
+            'id' => $doc->users->id,
+            'username' => $user->getUsername(),
+            'email' => "reindeer_samurai84@christmastown.org",
+            'name' => "Rudolph",
+            'surname' => "Reindeer"
+        ]];
+        $client = $this->buildHttpClient($url, 'red_nose', 'cl34rt3xt')
+            ->setMethod('PUT')
+            ->setBody($body);
+        /* When... (Action) */
+        $transfer = $client->exec();
+        /* Then... (Assertions) */
+        $message = $transfer . "\n";
+        $this->assertResponseConflict($client, $message);
+    }
+
+    /**
+     * @param \stdClass $doc
+     * @depends testPuttingOne200
+     */
     public function testDeletingGroupRelation204(\stdClass $doc)
     {
         /* Given... (Fixture) */

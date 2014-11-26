@@ -60,12 +60,14 @@ class SocialDataFixture
         $thisUser->setPassword("cl34rt3xt");
         $thisUser->addUserGroup($patternsGroup);
         $manager->persist($thisUser);
+        $this->addReference('player-1', $thisUser);
 
         $otherUser = new Entity\User;
         $otherUser->setUsername("the_other_guy");
         $otherUser->setEmail("the.other.guy@gmail.com");
         $otherUser->setPassword("b4dp4ssw0rd");
         $otherUser->addUserGroup($coffeeGroup);
+        $this->addReference('player-2', $otherUser);
         $manager->persist($otherUser);
 
         $post = new Entity\Post;
