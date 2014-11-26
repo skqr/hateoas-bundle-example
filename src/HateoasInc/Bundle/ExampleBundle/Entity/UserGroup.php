@@ -13,11 +13,13 @@ use Doctrine\ORM\Mapping as ORM,
 // HATEOAS.
 use GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceEntityInterface;
 // Validation.
-use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints as Assert,
+    Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity
  * @ORM\Table
+ * @UniqueEntity("name")
  */
 class UserGroup implements ResourceEntityInterface
 {
