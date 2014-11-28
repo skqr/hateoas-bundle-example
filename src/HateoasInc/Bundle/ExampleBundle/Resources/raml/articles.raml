@@ -3,29 +3,29 @@ title: HATEOAS Inc. Example API
 version: v1
 baseUri: http://hateoas-example.skqr.net/app_dev.php/api/{version}
 mediaType: application/vnd.api+json
-schemas:
-  - posts: !include posts.schema.json
+# schemas:
+#   - articles: !include articles.schema.json
 resourceTypes: !include resource_types.raml
 traits: !include traits.raml
-/posts:
-  displayName: Posts
+/articles:
+  displayName: Articles
   get:
-    description: Retrieves one or more posts.
+    description: Retrieves one or more articles.
     is: [paginated]
     responses:
       200:
   post:
-    description: Creates one or more posts.
+    description: Creates one or more articles.
     responses:
       201:
-  /{post-ids}:
+  /{article-ids}:
     get:
-      description: Retrieves one or more posts.
+      description: Retrieves one or more articles.
       responses:
         200:
     put:
-      description: Updates one or more posts.
+      description: Updates one or more articles.
       responses:
         204:
     delete:
-      description: Deletes one or more posts.
+      description: Deletes one or more articles.
