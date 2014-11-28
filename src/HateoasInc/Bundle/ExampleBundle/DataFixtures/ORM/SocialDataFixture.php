@@ -75,6 +75,19 @@ class SocialDataFixture
         $post->setOwner($thisUser);
         $manager->persist($post);
 
+        $article = new Entity\Article;
+        $article->setTitle("This is my standing on stuff");
+        $article->setContent("Here's me, standing on stuff. E.g. a carrot.");
+        // The pun is utterly lost.
+        $manager->getRepository('Gedmo\\Translatable\\Entity\\Translation')
+            ->translate(
+                $article, 'title', 'it', 'Questa è la mia posizione su roba')
+            ->translate($article, 'content', 'it', 'Qui sono io, in piedi su roba. E.g. una carota.')
+            ->translate($article, 'title', 'fr', 'Ce est ma position sur la substance')
+            ->translate($article, 'content', 'fr', 'Ici est moi, debout sur des trucs. Par exemple une carotte.');
+        $article->setOwner($thisUser);
+        $manager->persist($article);
+
         $comment = new Entity\Comment;
         $comment->setContent("Mine too. #RockedMyWorld");
         $comment->setOwner($otherUser);
