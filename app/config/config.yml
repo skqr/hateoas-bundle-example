@@ -58,7 +58,22 @@ doctrine:
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
-        auto_mapping: true
+        entity_managers:
+            default:
+                auto_mapping: true
+                mappings:
+                    gedmo_translatable:
+                        type: annotation
+                        prefix: Gedmo\Translatable\Entity
+                        dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity"
+                        alias: GedmoTranslatable # this one is optional and will default to the name set for the mapping
+                        is_bundle: false
+                    gedmo_translator:
+                        type: annotation
+                        prefix: Gedmo\Translator\Entity
+                        dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translator/Entity"
+                        alias: GedmoTranslator # this one is optional and will default to the name set for the mapping
+                        is_bundle: false
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -67,6 +82,13 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+# Doctrine Extensions
+stof_doctrine_extensions:
+    default_locale: en
+    orm:
+        default:
+            translatable: true
 
 # The resource_type *must* match the calculated type - for now.
 go_integro_hateoas:
@@ -78,6 +100,9 @@ go_integro_hateoas:
       - resource_type: users
         entity_class: HateoasInc\Bundle\ExampleBundle\Entity\User
         raml_doc: %kernel.root_dir%/../src/HateoasInc/Bundle/ExampleBundle/Resources/raml/users.raml
+      - resource_type: articles
+        entity_class: HateoasInc\Bundle\ExampleBundle\Entity\Article
+        raml_doc: %kernel.root_dir%/../src/HateoasInc/Bundle/ExampleBundle/Resources/raml/articles.raml
       - resource_type: posts
         entity_class: HateoasInc\Bundle\ExampleBundle\Entity\Post
         raml_doc: %kernel.root_dir%/../src/HateoasInc/Bundle/ExampleBundle/Resources/raml/posts.raml

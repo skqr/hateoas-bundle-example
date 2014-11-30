@@ -14,6 +14,11 @@ services:
     public: false
     tags:
       - { name: security.voter }
+  security.access.article_voter:
+    class: HateoasInc\Bundle\ExampleBundle\Security\Authorization\Voter\ArticleVoter
+    public: false
+    tags:
+      - { name: security.voter }
   security.access.post_voter:
     class: HateoasInc\Bundle\ExampleBundle\Security\Authorization\Voter\PostVoter
     public: false
