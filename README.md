@@ -1,5 +1,6 @@
-[GOintegro](http://www.gointegro.com/en/) / HATEOAS (example) [![Build Status](https://travis-ci.org/skqr/hateoas-bundle-example.svg)](https://travis-ci.org/skqr/hateoas-bundle-example)
-=============================================================
+# [GOintegro](http://www.gointegro.com/en/) / HATEOAS (example)
+
+[![Build Status](https://travis-ci.org/skqr/hateoas-bundle-example.svg)](https://travis-ci.org/skqr/hateoas-bundle-example) [![Latest Stable Version](https://poser.pugx.org/gointegro/hateoas-bundle/v/stable.svg)](https://packagist.org/packages/gointegro/hateoas-bundle) [![License](https://poser.pugx.org/gointegro/hateoas-bundle/license.svg)](https://packagist.org/packages/gointegro/hateoas-bundle)
 
 An example app using the [GOintegro HATEOAS bundle](https://github.com/gointegro/hateoas-bundle).
 
@@ -13,9 +14,20 @@ If you have SQLite and a couple of minutes, you can
 - install the [Composer](http://getcomposer.org/) deps,
 - run `app/console doctrine:schema:create` to setup the db,
 - run `app/console server:run` to run the app at `127.0.0.1:8000`,
+- run `app/console doctrine:fixtures:load --fixtures=src/HateoasInc/Bundle/ExampleBundle/DataFixtures/ORM` to get some data,
 
-and try out the HATEOAS API on `http://127.0.0.1:8000/api/v1`.
+and try out the **HATEOAS API** on `http://127.0.0.1:8000/api/v1`.
 
-The `/users`, `/posts`, and `/comments` resources are available.
+Configure [a REST client](http://www.getpostman.com/) to use [basic auth](https://en.wikipedia.org/wiki/Basic_access_authentication) with the following credentials.
 
-(You'll need to create some entities using the API or by running `app/console doctrine:fixtures:load --fixtures=src/HateoasInc/Bundle/ExampleBundle/DataFixtures/ORM`.)
+- **Player 1**
+  - username: `this_guy`
+  - password: `cl34rt3xt`
+
+- **Player 2**
+  - username: `the_other_guy`
+  - password: `b4dp4ssw0rd`
+
+The resources `/user-groups`, `/users`, `/posts`, and `/comments` are available.
+
+Cheers.
