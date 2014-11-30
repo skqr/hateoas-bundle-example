@@ -76,6 +76,7 @@ class SocialDataFixture
         $manager->persist($post);
 
         $article = new Entity\Article;
+        // Will be used as translation for the default Symfony locale.
         $article->setTitle("This is my standing on stuff");
         $article->setContent("Here's me, standing on stuff. E.g. a carrot.");
         // The pun is utterly lost.
