@@ -68,6 +68,12 @@ class Article implements ResourceEntityInterface, AuthorIsOwner
     protected $comments;
 
     /**
+     * @var string Overrides the translation listener's locale.
+     * @Gedmo\Locale
+     */
+    private $locale;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -185,5 +191,16 @@ class Article implements ResourceEntityInterface, AuthorIsOwner
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * @param string $locale
+     * @return self
+     */
+    public function setTranslatableLocale($locale)
+    {
+        $this->locale = $locale;
+
+        return $this;
     }
 }
