@@ -88,6 +88,7 @@ class SocialDataFixture
             ->translate($article, 'content', 'fr', 'Ici est moi, debout sur des trucs. Par exemple une carotte.');
         $article->setOwner($thisUser);
         $manager->persist($article);
+        $this->addReference('some-article', $article);
 
         $comment = new Entity\Comment;
         $comment->setContent("Mine too. #RockedMyWorld");

@@ -22,8 +22,7 @@
                     },
                     "required": [ "href", "type" ]
                 }
-            },
-            "required": [ "content" ]
+            }
         },
         "articles": {
             "type": "object",
@@ -38,8 +37,7 @@
                     },
                     "required": [ "owner" ]
                 }
-            },
-            "required": [ "content" ]
+            }
         }
     },
     "required": [ "articles" ]
