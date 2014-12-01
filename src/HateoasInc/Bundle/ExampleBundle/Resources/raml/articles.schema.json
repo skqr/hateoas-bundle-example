@@ -6,7 +6,7 @@
         "links": {
             "type": "object",
             "properties": {
-                "posts.owner": {
+                "articles.owner": {
                     "type": "object",
                     "properties": {
                         "href": { "type": "string" },
@@ -14,7 +14,7 @@
                     },
                     "required": [ "href", "type" ]
                 },
-                "posts.comments": {
+                "articles.comments": {
                     "type": "object",
                     "properties": {
                         "href": { "type": "string" },
@@ -25,7 +25,7 @@
             },
             "required": [ "content" ]
         },
-        "posts": {
+        "articles": {
             "type": "object",
             "properties": {
                 "id":  { "type": "string" },
@@ -42,5 +42,5 @@
             "required": [ "content" ]
         }
     },
-    "required": [ "posts" ]
+    "required": [ "articles" ]
 }
