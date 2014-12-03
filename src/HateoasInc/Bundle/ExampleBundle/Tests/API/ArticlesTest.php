@@ -61,6 +61,132 @@ class ArticlesTest extends ApiTestCase
         return $data;
     }
 
+    public function testGettingOneInEnglishWithMeta200()
+    {
+        /* Given... (Fixture) */
+        $someArticle
+            = self::$fixtures['social']->getReference('some-article');
+        $url = $this->getRootUrl() . self::RESOURCE_PATH
+            . '/' . $someArticle->getId()
+            . '?i18n';
+        $client = $this->buildHttpClient(
+            $url, 'this_guy', 'cl34rt3xt', static::CONTENT_JSON_API, 'en'
+        );
+        /* When... (Action) */
+        $transfer = $client->exec();
+        /* Then... (Assertions) */
+        $message = $transfer . "\n";
+        $this->assertResponseOK($client, $message);
+        $this->assertJsonApiSchema($transfer, $message);
+        $expected = [
+            'articles' => [
+                'id' => '1',
+                'type' => 'articles',
+                'title' => 'This is my standing on stuff',
+                'content' => 'Here\'s me, standing on stuff. E.g. a carrot.',
+                'links' => [
+                    'owner' => '1',
+                    'comments' => ['1']
+                ]
+            ],
+            'meta' => [
+                'articles' => [
+                    'translations' => [
+                        'content' => [[
+                            'locale' => 'fr',
+                            'value' => 'Ici est moi, debout sur des trucs. Par exemple une carotte.'
+                        ], [
+                            'locale' => 'it',
+                            'value' => 'Qui sono io, in piedi su roba. E.g. una carota.'
+                        ]],
+                        'title' => [[
+                            'locale' => 'fr',
+                            'value' => 'Ce est ma position sur la substance'
+                        ], [
+                            'locale' => 'it',
+                            'value' => 'Questa è la mia posizione su roba'
+                        ]]
+                    ]
+                ]
+            ],
+            'links' => [
+                'articles.owner' => [
+                    'href' => "/api/v1/users/{articles.owner}",
+                    'type' => "users"
+                ],
+                'articles.comments' => [
+                    'href' => "/api/v1/articles/{articles.id}/links/comments",
+                    'type' => "comments"
+                ]
+            ]
+        ];
+        $actual = json_decode($transfer, TRUE);
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testGettingManyInEnglishWithMeta200()
+    {
+        /* Given... (Fixture) */
+        $someArticle
+            = self::$fixtures['social']->getReference('some-article');
+        $url = $this->getRootUrl() . self::RESOURCE_PATH
+            . '?i18n';
+        $client = $this->buildHttpClient(
+            $url, 'this_guy', 'cl34rt3xt', static::CONTENT_JSON_API, 'en'
+        );
+        /* When... (Action) */
+        $transfer = $client->exec();
+        /* Then... (Assertions) */
+        $message = $transfer . "\n";
+        $this->assertResponseOK($client, $message);
+        $this->assertJsonApiSchema($transfer, $message);
+        $expected = [
+            'articles' => [[
+                'id' => '1',
+                'type' => 'articles',
+                'title' => 'This is my standing on stuff',
+                'content' => 'Here\'s me, standing on stuff. E.g. a carrot.',
+                'links' => [
+                    'owner' => '1',
+                    'comments' => ['1']
+                ]
+            ]],
+            'meta' => [
+                'articles' => [
+                    'translations' => [[
+                        'id' => '1',
+                        'content' => [[
+                            'locale' => 'fr',
+                            'value' => 'Ici est moi, debout sur des trucs. Par exemple une carotte.'
+                        ], [
+                            'locale' => 'it',
+                            'value' => 'Qui sono io, in piedi su roba. E.g. una carota.'
+                        ]],
+                        'title' => [[
+                            'locale' => 'fr',
+                            'value' => 'Ce est ma position sur la substance'
+                        ], [
+                            'locale' => 'it',
+                            'value' => 'Questa è la mia posizione su roba'
+                        ]]
+                    ]]
+                ]
+            ],
+            'links' => [
+                'articles.owner' => [
+                    'href' => "/api/v1/users/{articles.owner}",
+                    'type' => "users"
+                ],
+                'articles.comments' => [
+                    'href' => "/api/v1/articles/{articles.id}/links/comments",
+                    'type' => "comments"
+                ]
+            ]
+        ];
+        $actual = json_decode($transfer, TRUE);
+        $this->assertEquals($expected, $actual);
+    }
+
     public function testGettingOneInFrench200()
     {
         /* Given... (Fixture) */
