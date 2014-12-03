@@ -85,7 +85,9 @@ swiftmailer:
 
 # Doctrine Extensions
 stof_doctrine_extensions:
-    default_locale: en
+    default_locale: "%locale%"
+    translation_fallback: true
+    # persist_default_translation: true
     orm:
         default:
             translatable: true
