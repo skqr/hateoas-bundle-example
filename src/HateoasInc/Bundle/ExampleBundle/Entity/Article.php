@@ -59,27 +59,10 @@ class Article implements ResourceEntityInterface, AuthorIsOwner
     protected $owner;
 
     /**
-     * @var ArrayCollection
-     * @ORM\OneToMany(
-     *   targetEntity="HateoasInc\Bundle\ExampleBundle\Entity\Comment",
-     *   mappedBy="subject"
-     * )
-     */
-    protected $comments;
-
-    /**
      * @var string Overrides the translation listener's locale.
      * @Gedmo\Locale
      */
     private $locale;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->comments = new ArrayCollection();
-    }
 
     /**
      * Get id
@@ -158,39 +141,6 @@ class Article implements ResourceEntityInterface, AuthorIsOwner
     public function getOwner()
     {
         return $this->owner;
-    }
-
-    /**
-     * Add comments
-     *
-     * @param \HateoasInc\Bundle\ExampleBundle\Entity\Comment $comments
-     * @return self
-     */
-    public function addComment(\HateoasInc\Bundle\ExampleBundle\Entity\Comment $comments)
-    {
-        $this->comments[] = $comments;
-
-        return $this;
-    }
-
-    /**
-     * Remove comments
-     *
-     * @param \HateoasInc\Bundle\ExampleBundle\Entity\Comment $comments
-     */
-    public function removeComment(\HateoasInc\Bundle\ExampleBundle\Entity\Comment $comments)
-    {
-        $this->comments->removeElement($comments);
-    }
-
-    /**
-     * Get comments
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getComments()
-    {
-        return $this->comments;
     }
 
     /**
