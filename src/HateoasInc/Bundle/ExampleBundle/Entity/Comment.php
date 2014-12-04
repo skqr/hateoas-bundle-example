@@ -11,7 +11,8 @@ namespace HateoasInc\Bundle\ExampleBundle\Entity;
 use Doctrine\ORM\Mapping as ORM,
     Doctrine\Common\Collections\ArrayCollection;
 // HATEOAS.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceEntityInterface;
+use GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceEntityInterface,
+    GoIntegro\Bundle\HateoasBundle\Entity\AuthorIsOwner;
 // Validation.
 use Symfony\Component\Validator\Constraints as Assert;
 // Security.
@@ -21,7 +22,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Entity
  * @ORM\Table
  */
-class Comment implements ResourceEntityInterface
+class Comment implements ResourceEntityInterface, AuthorIsOwner
 {
     /**
      * @ORM\Id
@@ -39,6 +40,7 @@ class Comment implements ResourceEntityInterface
 
     /**
      * @var ArrayCollection
+     * @ORM\JoinColumn(nullable=FALSE)
      * @ORM\ManyToOne(
      *   targetEntity="HateoasInc\Bundle\ExampleBundle\Entity\User"
      * )
