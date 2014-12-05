@@ -69,7 +69,7 @@ class ArticlesTest extends ApiTestCase
             = self::$fixtures['social']->getReference('some-article');
         $url = $this->getRootUrl() . self::RESOURCE_PATH
             . '/' . $someArticle->getId()
-            . '?i18n';
+            . '?meta=i18n';
         $client = $this->buildHttpClient(
             $url, 'this_guy', 'cl34rt3xt', static::CONTENT_JSON_API, 'en'
         );
@@ -129,7 +129,7 @@ class ArticlesTest extends ApiTestCase
         $otherArticle
             = self::$fixtures['social']->getReference('some-other-article');
         $url = $this->getRootUrl() . self::RESOURCE_PATH
-            . '?i18n';
+            . '?meta=i18n';
         $client = $this->buildHttpClient(
             $url, 'this_guy', 'cl34rt3xt', static::CONTENT_JSON_API, 'en'
         );
@@ -437,7 +437,7 @@ class ArticlesTest extends ApiTestCase
             = self::$fixtures['social']->getReference('some-article');
         $url = $this->getRootUrl() . self::RESOURCE_PATH
             . '/' . $someArticle->getId()
-            . '?i18n';
+            . '?meta=i18n';
         $body = [
             'articles' => [
                 'id' => (string) $someArticle->getId(),
@@ -490,7 +490,7 @@ class ArticlesTest extends ApiTestCase
             . '/' . implode(',', [
                 $someArticle->getId(), $otherArticle->getId()
             ])
-            . '?i18n';
+            . '?meta=i18n';
         $body = [
             'articles' => [[
                 'id' => (string) $someArticle->getId(),
