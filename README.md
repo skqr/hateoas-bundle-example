@@ -1,6 +1,6 @@
 # [GOintegro](http://www.gointegro.com/en/) / HATEOAS (example)
 
-[![Build Status](https://travis-ci.org/skqr/hateoas-bundle-example.svg)](https://travis-ci.org/skqr/hateoas-bundle-example)
+[![Build Status](https://travis-ci.org/skqr/hateoas-bundle-example.svg)](https://travis-ci.org/skqr/hateoas-bundle-example) [![Code Climate](https://codeclimate.com/github/skqr/hateoas-bundle-example/badges/gpa.svg)](https://codeclimate.com/github/skqr/hateoas-bundle-example)
 
 An example app using the [GOintegro HATEOAS bundle](https://github.com/gointegro/hateoas-bundle).
 
