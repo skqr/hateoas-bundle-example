@@ -9,9 +9,16 @@ php:
   # aliased to a recent 5.6.x version
   - 5.6
 
+addons:
+  code_climate:
+    repo_token: f6327c2607d947e78ea7d4da84094272e99f706963d75f4722a9fa9a9241392c
+
 before_script:
   - composer install
   - app/console doctrine:schema:create
   - app/console server:run &
 
-script: phpunit -c app/phpunit.xml.dist
+script: phpunit -c app/phpunit.xml --coverage-clover build/logs/clover.xml
+
+after_script:
+  - vendor/bin/test-reporter

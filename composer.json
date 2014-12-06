@@ -24,7 +24,8 @@
         "stof/doctrine-extensions-bundle": "*"
     },
     "require-dev": {
-        "sensio/generator-bundle": "~2.3"
+        "sensio/generator-bundle": "~2.3",
+        "codeclimate/php-test-reporter": "dev-master"
     },
     "scripts": {
         "post-root-package-install": [
