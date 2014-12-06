@@ -1,0 +1,140 @@
+#%RAML 0.8
+title: HATEOAS Inc. Example API
+version: v1
+baseUri: http://localhost:8000/api/{version}
+mediaType: application/vnd.api+json
+schemas:
+  - users: !include users.schema.json
+  - posts: !include posts.schema.json
+  - articles: !include articles.schema.json
+resourceTypes: !include resource_types.raml
+traits: !include traits.raml
+/users:
+  displayName: User
+  get:
+    description: Retrieves one or more users.
+    is: [paginated]
+    responses:
+      200:
+  post:
+    description: Creates one or more users.
+    responses:
+      201:
+  /{user-ids}:
+    get:
+      description: Retrieves one or more users.
+      responses:
+        200:
+    put:
+      description: Updates one or more users.
+      responses:
+        200:
+    delete:
+      description: Deletes one or more users.
+    /links:
+      /{relationship}:
+        get:
+          description: Retrieves one or more users.
+          responses:
+            200:
+        post:
+          description: Creates one or more users.
+          responses:
+            201:
+        put:
+          description: Updates one or more users.
+          responses:
+            204:
+        delete:
+          description: Deletes all relationships of this type.
+        /{relationship-ids}:
+          delete:
+            description: Deletes one or more users.
+/user-groups:
+  displayName: Posts
+  get:
+    description: Retrieves one or more user-groups.
+    is: [paginated]
+    responses:
+      200:
+  post:
+    description: Creates one or more user-groups.
+    responses:
+      201:
+  /{user-group-ids}:
+    get:
+      description: Retrieves one or more user-groups.
+      responses:
+        200:
+    put:
+      description: Updates one or more user-groups.
+      responses:
+        204:
+    delete:
+      description: Deletes one or more user-groups.
+/articles:
+  displayName: Articles
+  get:
+    description: Retrieves one or more articles.
+    is: [paginated]
+    responses:
+      200:
+  post:
+    description: Creates one or more articles.
+    responses:
+      201:
+  /{article-ids}:
+    get:
+      description: Retrieves one or more articles.
+      responses:
+        200:
+    put:
+      description: Updates one or more articles.
+      responses:
+        204:
+    delete:
+      description: Deletes one or more articles.
+/posts:
+  displayName: Posts
+  get:
+    description: Retrieves one or more posts.
+    is: [paginated]
+    responses:
+      200:
+  post:
+    description: Creates one or more posts.
+    responses:
+      201:
+  /{post-ids}:
+    get:
+      description: Retrieves one or more posts.
+      responses:
+        200:
+    put:
+      description: Updates one or more posts.
+      responses:
+        204:
+    delete:
+      description: Deletes one or more posts.
+/comments:
+  displayName: Posts
+  get:
+    description: Retrieves one or more comments.
+    is: [paginated]
+    responses:
+      200:
+  post:
+    description: Creates one or more comments.
+    responses:
+      201:
+  /{comment-ids}:
+    get:
+      description: Retrieves one or more comments.
+      responses:
+        200:
+    put:
+      description: Updates one or more comments.
+      responses:
+        204:
+    delete:
+      description: Deletes one or more comments.
