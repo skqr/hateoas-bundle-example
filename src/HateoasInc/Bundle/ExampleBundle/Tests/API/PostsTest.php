@@ -205,7 +205,8 @@ class PostsTest extends ApiTestCase
                 'type' => 'posts',
                 'content' => 'This is quite a post.',
                 'links' => [
-                    'owner' => '1'
+                    'owner' => '1',
+                    'comments' => []
                 ]
             ],
             'linked' => [
