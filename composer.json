@@ -18,8 +18,8 @@
         "sensio/distribution-bundle": "~3.0",
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
-        "gointegro/hateoas-bundle": "dev-develop",
-        "gointegro/hateoas": "dev-develop",
+        "gointegro/hateoas-bundle": "dev-master",
+        "gointegro/hateoas": "dev-master",
         "doctrine/doctrine-fixtures-bundle": "*",
         "stof/doctrine-extensions-bundle": "*"
     },
