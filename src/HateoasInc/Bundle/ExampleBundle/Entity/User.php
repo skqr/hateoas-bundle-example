@@ -92,6 +92,7 @@ class User implements UserInterface, ResourceEntityInterface
     public function __construct()
     {
         $this->followers = new ArrayCollection();
+        $this->userGroups = new ArrayCollection();
         $this->salt = md5(uniqid(NULL, TRUE));
     }
 
