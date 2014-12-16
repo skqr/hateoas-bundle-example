@@ -12,8 +12,8 @@ use Doctrine\ORM\Mapping as ORM,
     Doctrine\Common\Collections\ArrayCollection,
     Gedmo\Mapping\Annotation as Gedmo;
 // HATEOAS.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\ResourceEntityInterface,
-    GoIntegro\Bundle\HateoasBundle\Entity\AuthorIsOwner;
+use GoIntegro\Hateoas\JsonApi\ResourceEntityInterface,
+    GoIntegro\Hateoas\Entity\AuthorIsOwner;
 // Validation.
 use Symfony\Component\Validator\Constraints as Assert;
 // Security.

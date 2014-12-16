@@ -3,7 +3,7 @@
 namespace HateoasInc\Bundle\ExampleBundle\Rest\Resource;
 
 // REST.
-use GoIntegro\Bundle\HateoasBundle\JsonApi\EntityResource;
+use GoIntegro\Hateoas\JsonApi\EntityResource;
 
 class UserResource extends EntityResource
 {

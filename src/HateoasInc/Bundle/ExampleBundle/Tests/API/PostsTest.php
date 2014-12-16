@@ -8,7 +8,7 @@
 namespace HateoasInc\Bundle\ExampleBundle\Tests\API;
 
 // Testing.
-use GoIntegro\Bundle\HateoasBundle\Test\PHPUnit\ApiTestCase;
+use GoIntegro\Hateoas\Test\PHPUnit\ApiTestCase;
 // Fixtures.
 use HateoasInc\Bundle\ExampleBundle\DataFixtures\ORM\SocialDataFixture;
 
