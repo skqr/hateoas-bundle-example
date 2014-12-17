@@ -20,6 +20,8 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "gointegro/hateoas-bundle": "dev-master",
         "gointegro/hateoas": "dev-master",
+        "gointegro/raml": "dev-master",
+        "gointegro/json": "dev-master",
         "doctrine/doctrine-fixtures-bundle": "*",
         "stof/doctrine-extensions-bundle": "*"
     },
