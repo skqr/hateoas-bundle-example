@@ -88,9 +88,13 @@ class User implements UserInterface, ResourceEntityInterface
 
     /**
      * Constructor
+     * @param string $username
+     * @param string $email
      */
-    public function __construct()
+    public function __construct($username, $email)
     {
+        $this->username = $username;
+        $this->email = $email;
         $this->followers = new ArrayCollection();
         $this->userGroups = new ArrayCollection();
         $this->salt = md5(uniqid(NULL, TRUE));
