@@ -54,13 +54,13 @@ class SocialDataFixture
         $manager->persist($soapGroup);
         $this->addReference('soap-group', $soapGroup);
 
-        $thisUser = new Entity\User("this_guy", "this.guy@gmail.com");
+        $thisUser = new Entity\User("this_guy");
         $thisUser->setPassword("cl34rt3xt");
         $thisUser->addUserGroup($patternsGroup);
         $manager->persist($thisUser);
         $this->addReference('player-1', $thisUser);
 
-        $otherUser = new Entity\User("the_other_guy", "other.guy@gmail.com");
+        $otherUser = new Entity\User("the_other_guy");
         $otherUser->setPassword("b4dp4ssw0rd");
         $otherUser->addUserGroup($coffeeGroup);
         $this->addReference('player-2', $otherUser);
