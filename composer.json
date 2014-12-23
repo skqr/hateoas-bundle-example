@@ -18,9 +18,9 @@
         "sensio/distribution-bundle": "~3.0",
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
-        "gointegro/hateoas-bundle": "dev-master",
-        "gointegro/hateoas": "dev-master",
-        "gointegro/raml": "dev-master",
+        "gointegro/hateoas-bundle": "dev-feature/conv-over-conf",
+        "gointegro/hateoas": "dev-feature/conv-over-conf",
+        "gointegro/raml": "dev-feature/conv-over-conf",
         "gointegro/json": "dev-master",
         "doctrine/doctrine-fixtures-bundle": "*",
         "stof/doctrine-extensions-bundle": "*"
