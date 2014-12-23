@@ -4,11 +4,11 @@ version: v1
 baseUri: http://localhost:8000/api/{version}
 mediaType: application/vnd.api+json
 schemas:
-  - users: !include users.schema.json
-  - posts: !include posts.schema.json
-  - articles: !include articles.schema.json
-resourceTypes: !include resource_types.raml
-traits: !include traits.raml
+  - users: !include raml/users.schema.json
+  - posts: !include raml/posts.schema.json
+  - articles: !include raml/articles.schema.json
+resourceTypes: !include raml/resource_types.raml
+traits: !include raml/traits.raml
 /users:
   displayName: User
   get:
