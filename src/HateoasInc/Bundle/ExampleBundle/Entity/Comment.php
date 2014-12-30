@@ -57,6 +57,18 @@ class Comment implements ResourceEntityInterface, AuthorIsOwner
     protected $subject;
 
     /**
+     * Constructor
+     * @param Post $subject
+     * @param string $content
+     */
+    public function __construct(Post $subject, $content)
+    {
+        $this->subject = $subject;
+        $this->content = $content;
+        $this->comments = new ArrayCollection();
+    }
+
+    /**
      * Get id
      *
      * @return integer

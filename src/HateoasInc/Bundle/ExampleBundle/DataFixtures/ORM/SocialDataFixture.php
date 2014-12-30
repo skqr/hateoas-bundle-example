@@ -66,8 +66,7 @@ class SocialDataFixture
         $this->addReference('player-2', $otherUser);
         $manager->persist($otherUser);
 
-        $post = new Entity\Post;
-        $post->setContent("Check this bundle out. #RockedMyWorld");
+        $post = new Entity\Post("Check this bundle out. #RockedMyWorld");
         $post->setOwner($thisUser);
         $manager->persist($post);
 
@@ -105,10 +104,8 @@ class SocialDataFixture
         $manager->persist($otherArticle);
         $this->addReference('some-other-article', $otherArticle);
 
-        $comment = new Entity\Comment;
-        $comment->setContent("Mine too. #RockedMyWorld");
+        $comment = new Entity\Comment($post, "Mine too. #RockedMyWorld");
         $comment->setOwner($otherUser);
-        $comment->setSubject($post);
         $manager->persist($comment);
 
         $manager->flush();

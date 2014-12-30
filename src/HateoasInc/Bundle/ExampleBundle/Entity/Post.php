@@ -59,9 +59,11 @@ class Post implements ResourceEntityInterface, AuthorIsOwner
 
     /**
      * Constructor
+     * @param string $content
      */
-    public function __construct()
+    public function __construct($content)
     {
+        $this->content = $content;
         $this->comments = new ArrayCollection();
     }
 
