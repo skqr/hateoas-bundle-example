@@ -94,7 +94,6 @@ stof_doctrine_extensions:
 
 # The resource_type *must* match the calculated type - for now.
 go_integro_hateoas:
-  raml_doc: %kernel.root_dir%/../src/HateoasInc/Bundle/ExampleBundle/Resources/raml/api.raml
   cache: ~
     # resource:
     #   redis:
