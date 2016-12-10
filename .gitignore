@@ -18,8 +18,8 @@
 !var/logs/.gitkeep
 
 # Parameters
-/app/config/parameters.yml
-/app/config/parameters.ini
+# /app/config/parameters.yml
+# /app/config/parameters.ini
 
 # Managed by Composer
 /app/bootstrap.php.cache
@@ -42,7 +42,7 @@
 /composer.lock
 
 # Sublime Text
-hateoas-example.sublime-*
+*.sublime-*
 
 # SQLite
 app/data/sqlite.db*

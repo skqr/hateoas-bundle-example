@@ -95,15 +95,29 @@ stof_doctrine_extensions:
 # The resource_type *must* match the calculated type - for now.
 go_integro_hateoas:
   cache: ~
-    # resource:
-    #   redis:
-    #     parameters:
-    #       scheme: tcp
-    #       host: 127.0.0.1
-    #       port: 6379
-    #     options: []
-    #   memcached: ~
-    #     persistent_id: null
-    #     servers:
-    #       - host: 127.0.0.1
-    #         port: 11211
+# go_integro_hateoas:
+  # cache:
+  #   resource:
+  #     redis:
+  #       parameters:
+  #         scheme: tcp
+  #         host: 127.0.0.1
+  #         port: 6379
+  #       options: []
+  #     memcached:
+  #       persistent_id: null
+  #       servers:
+  #         - host: 127.0.0.1
+  #           port: 11211
+  # json_api:
+  #   magic_services:
+  #     - resource_type: user-groups
+  #       entity_class: HateoasInc\Bundle\ExampleBundle\Entity\UserGroup
+  #     - resource_type: users
+  #       entity_class: HateoasInc\Bundle\ExampleBundle\Entity\User
+  #     - resource_type: articles
+  #       entity_class: HateoasInc\Bundle\ExampleBundle\Entity\Article
+  #     - resource_type: posts
+  #       entity_class: HateoasInc\Bundle\ExampleBundle\Entity\Post
+  #     - resource_type: comments
+  #       entity_class: HateoasInc\Bundle\ExampleBundle\Entity\Comment

@@ -1,0 +1,21 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_sqlite
+    database_path: '%kernel.root_dir%/data/sqlite.db'
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: hateoas_example
+    database_user: root
+    database_password: null
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    locale: en
+    secret: 4a9abc7bd22c953a5313d69863c5e77e5ce44660
+    debug_toolbar: true
+    debug_redirects: false
+    use_assetic_controller: true
+    api.base_url: 'http://127.0.0.1:8000'
+    api.url_path: /api/v1
+    api.resource_class_path: Rest/Resource

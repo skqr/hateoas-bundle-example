@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/skqr/hateoas-bundle-example.svg)](https://travis-ci.org/skqr/hateoas-bundle-example) [![Code Climate](https://codeclimate.com/github/skqr/hateoas-bundle-example/badges/gpa.svg)](https://codeclimate.com/github/skqr/hateoas-bundle-example)
 
-An example app using the [GOintegro HATEOAS bundle](https://github.com/gointegro/hateoas-bundle).
+An example app using the [GOintegro HATEOAS bundle](https://github.com/skqr/hateoas-bundle).
 
 Try it out
 ==========
