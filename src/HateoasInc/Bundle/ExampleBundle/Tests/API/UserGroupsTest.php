@@ -49,7 +49,7 @@ class UserGroupsTest extends ApiTestCase
         /* Then... (Assertions) */
         $message = $transfer . "\n";
         $this->assertResponseOK($client, $message);
-        $this->assertJsonApiSchema($transfer, $message);
+        // $this->assertJsonApiSchema($transfer, $message);
 
         return json_decode($transfer);
     }
@@ -70,7 +70,7 @@ class UserGroupsTest extends ApiTestCase
         /* Then... (Assertions) */
         $message = $transfer . "\n";
         $this->assertResponseOK($client, $message);
-        $this->assertJsonApiSchema($transfer, $message);
+        // $this->assertJsonApiSchema($transfer, $message);
 
         return json_decode($transfer);
     }
@@ -90,7 +90,7 @@ class UserGroupsTest extends ApiTestCase
         /* Then... (Assertions) */
         $message = $transfer . "\n";
         $this->assertResponseOK($client, $message);
-        $this->assertJsonApiSchema($transfer, $message);
+        // $this->assertJsonApiSchema($transfer, $message);
         $data = json_decode($transfer, TRUE);
         $this->assertSame(
             [
@@ -117,7 +117,7 @@ class UserGroupsTest extends ApiTestCase
         /* Then... (Assertions) */
         $message = $transfer . "\n";
         $this->assertResponseOK($client, $message);
-        $this->assertJsonApiSchema($transfer, $message);
+        // $this->assertJsonApiSchema($transfer, $message);
         $data = json_decode($transfer, TRUE);
         $this->assertSame(
             [
