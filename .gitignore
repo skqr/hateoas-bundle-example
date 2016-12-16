@@ -1,6 +1,13 @@
 # Git
 !.gitignore
 
+# Travis CI
+!.travis.yml
+!.travis.php.ini
+
+# Code Climate
+!.codeclimate.yml
+
 # Vim, nano, etc.
 *~
 .*

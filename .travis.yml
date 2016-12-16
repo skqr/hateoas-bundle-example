@@ -12,6 +12,7 @@ addons:
     repo_token: f6327c2607d947e78ea7d4da84094272e99f706963d75f4722a9fa9a9241392c
 
 before_script:
+  - phpenv config-add .travis.php.ini
   - composer install --dev
   - app/console doctrine:schema:create
   - app/console server:run &
