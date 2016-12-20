@@ -11,8 +11,10 @@ addons:
   code_climate:
     repo_token: f6327c2607d947e78ea7d4da84094272e99f706963d75f4722a9fa9a9241392c
 
+services:
+  - postgresql
+
 before_script:
-  # - phpenv config-rm xdebug.ini
   - wget https://raw.githubusercontent.com/composer/getcomposer.org/master/web/installer -O - -q | php -- --quiet
   - php -d memory_limit=-1 ./composer.phar install -vvv
   - app/console doctrine:schema:create
