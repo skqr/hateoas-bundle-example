@@ -152,6 +152,37 @@ class UsersTest extends ApiTestCase
 
     /**
      * @param \stdClass $doc
+     * @depends testGettingOne200
+     */
+    public function testPostingOne200()
+    {
+        /* Given... (Fixture) */
+        $coffeeGroup
+            = self::$fixtures['social']->getReference('coffee-group');
+        $url = $this->getRootUrl() . self::RESOURCE_PATH;
+        $body = ['users' => [
+            'username' => "new_guy",
+            'password' => "12345",
+            'email' => "new_guy@christmastown.org",
+            'name' => "John",
+            'surname' => "Doe",
+            'links' => [
+                'user-groups' => [$coffeeGroup->getId()]
+            ]
+        ]];
+        $client = $this->buildHttpClient($url, 'the_other_guy', 'b4dp4ssw0rd')
+            ->setMethod('POST')
+            ->setBody($body);
+        /* When... (Action) */
+        $transfer = $client->exec();
+        /* Then... (Assertions) */
+        $message = $transfer . "\n";
+        $this->assertResponseOK($client, $message);
+        $this->assertJsonApiSchema($transfer, $message);
+    }
+
+    /**
+     * @param \stdClass $doc
      * @depends testPuttingOne200
      */
     public function testPuttingOne403(\stdClass $doc)
